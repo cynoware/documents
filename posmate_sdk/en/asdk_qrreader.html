@@ -1,0 +1,126 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="../sdk.css" />
+<link rel="stylesheet" href="../styles/foundation.css" />
+<script src="../highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+<ul id='main'>
+	<li><div class='title'>Public class</div>
+		<div class='jclass'>com.posmate.<span class='jclassname'>QrReader</span></div>
+	</li>
+	<li><div class='title'>Constants</div>
+		<pre><code class='java'>public static final int kTriggerMode_PressKey   = 0x00;
+public static final int kTriggerMode_Continuous = 0x01;
+public static final int kTriggerMode_Auto       = 0x02;
+public static final int kTriggerMode_Respond    = 0x03;
+public static final int kTriggerMode_Wave       = 0x04;</code></pre>
+	</li>    
+	<li><div class='title'>Functions</div>
+		<ul>	
+			<li><div class='funcname'>scan</div>
+				<div class='description'>
+					Open the Qr reader and scan the data
+				</div>
+				<dl>
+					<dt>device</dt><dd>the PosMate device.</dd>
+					<dt>uart</dt><dd>UART number</dd>
+					<dt>buf</dt><dd>the buffer that will receive read data</dd>
+					<dt>offset</dt><dd>offset from where will save the scanned data</dd>
+					<dt>size</dt><dd>length of maximum scanned data</dd>
+					<dt>mode</dt><dd>the trigger mode</dd>
+					<dt>Return</dt><dd>the actual read length</dd>
+				<dl>
+				<pre><code class='java'>static int scan (Device device, int uart, byte[] buf, int offset, int size, int mode);</code></pre>
+			</li>
+			<li><div class='funcname'>scan</div>
+				<div class='description'>
+					Open the Qr reader and scan the data
+				</div>
+				<dl>
+					<dt>device</dt><dd>the PosMate device.</dd>
+					<dt>uart</dt><dd>UART number</dd>
+					<dt>Return</dt><dd>the scanned string</dd>
+				<dl>
+				<pre><code class='java'>static String scan (Device device, int uart);</code></pre>
+			</li>
+			<li><div class='funcname'>scannerExists</div>
+				<div class='description'>
+					Check if Qr reader is connected or not
+				</div>
+				<dl>
+					<dt>device</dt><dd>the PosMate device.</dd>
+					<dt>uart</dt><dd>UART number</dd>
+					<dt>Return</dt><dd>true if Qr reader is connected, otherwise false.</dd>
+				</dl>
+				<pre><code class='java'>static boolean scannerExists (Device device, int uart);</code></pre>
+			</li>
+			<li><div class='funcname'>stopScan</div>
+				<div class='description'>
+					Stop scanning
+				</div>
+				<dl>
+					<dt>device</dt><dd>the PosMate device.</dd>
+					<dt>uart</dt><dd>UART number</dd>
+					<dt>Return</dt><dd>reserved</dd>
+				</dl>
+				<pre><code class='java'>static int stopScan (Device device, int uart);</code></pre>
+			</li>
+			<li><div class='funcname'>setScanTriggerMode</div>
+				<div class='description'>
+					Set trigger mode of scanner
+				</div>
+				<dl>
+					<dt>device</dt><dd>the PosMate device.</dd>
+					<dt>uart</dt><dd>UART number</dd>
+					<dt>mode</dt><dd>the trigger mode</dd>
+					<dt>Return</dt><dd>reserved</dd>
+				<dl>
+				<pre><code class='java'>static int setScanTriggerMode(Device device, int uart, int mode);</code></pre>
+			</li>
+		</ul>
+	</li>
+
+    <li>
+        <div class='title'>Example</div>
+        <pre>
+        <code class='c'>boolean qrflag = true;
+
+public void startQRCode(Device baseDevice) {
+    	
+    try{
+        qrflag = true;
+        while(qrflag){
+            String str = QrReader.scan(baseDevice, config.CONFIG_DOCK_QRREADER_UART);
+            if(str.trim().length() <= 2){
+                str = "";
+            }
+            if (str != null && str.length() > 0) {
+                QrReader.stopScan(baseDevice, config.CONFIG_DOCK_QRREADER_UART);
+                break;
+            }
+        }
+    }catch(Exception ex){
+        ex.printStackTrace();
+        QrReader.stopScan(baseDevice, config.CONFIG_DOCK_QRREADER_UART);
+    }
+}
+
+public void stopQRCode(Device baseDevice) {
+    try{
+    	QrReader.stopScan(baseDevice, config.CONFIG_DOCK_QRREADER_UART);
+        qrflag = false;
+    }
+    catch(Exception ex){
+        ex.printStackTrace();
+    }
+}</code></pre>
+    </li>
+
+</ul>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="../sdk.css" />
+<link rel="stylesheet" href="../styles/default.css" />
+<script src="../highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+<ul id='main'>
+	<li><div class='title'>Definitions</div>
+		<pre><code class='c'>#define DEVICE_DETECT_FRAME_USB	0x00000001
+#define DEVICE_DETECT_DOCK_USB  0x00000002
+#define DEVICE_DETECT_DOCK_BT   0x00000004
+#define DEVICE_DETECT_UART      0x00000008  //Reserved
+#define DEVICE_DETECT_ALL       0xFFFFFFFF</code></pre>
+	</li>
+	<li><div class='title'>Functions</div>
+		<ul>	
+			<li><div class='funcname'>deviceNew</div>
+				<div class='description'>
+					Create new instance of PosMate device.
+				</div>
+				<dl>
+					<dt>Return</dt><dd>Pointer to the PosMate device.</dd>
+				<dl>
+				<pre><code class='c'>Device *deviceNew (void);</code></pre>
+			</li>
+			<li><div class='funcname'>deviceFree</div>
+				<div class='description'>
+					Delete the instance of PosMate device.
+				</div>
+				<dl>
+					<dt>device</dt><dd>Pointer to the PosMate device.</dd>
+				</dl>
+				<pre><code class='c'>void deviceFree (Device *device);</code></pre>
+			</li>
+			<li><div class='funcname'>deviceDetect</div>
+				<div class='description'>
+					Detect if the PosMate device is connected.
+				</div>
+				<dl>
+					<dt>device</dt><dd>Pointer to the PosMate device.</dd>
+					<dt>deviceMask</dt><dd>The device connection type, could be combined with following values -
+					<pre><code class='c'>    DEVICE_DETECT_FRAME_USB
+    DEVICE_DETECT_DOCK_USB
+    DEVICE_DETECT_DOCK_BT
+    DEVICE_DETECT_UART
+    DEVICE_DETECT_ALL</code></pre></dd>
+					<dt>Return</dt><dd>A device mask value that indicates one connection is established. Returns 0 if no device detected.</dd>
+				</dl>
+				<pre><code class='c'>int deviceDetect (Device *device, int deviceMask);</code></pre>
+			</li>
+			<li><div class='funcname'>deviceIsConnected</div>
+				<div class='description'>
+					Get PosMate device connection state
+				</div>
+				<dl>
+					<dt>device</dt><dd>Pointer to the PosMate device.</dd>
+					<dt>Return</dt><dd>TRUE if device is connected, otherwise FALSE.</dd>
+				</dl>
+				<pre><code class='c'>BOOL deviceIsConnected (Device *device);</code></pre>
+			</li>
+			<li><div class='funcname'>deviceGetRawDevice</div>
+				<div class='description'>
+					Get the device connection object (bluetooth, USB, etc).
+				</div>
+				<dl>
+					<dt>device</dt><dd>Pointer to the PosMate device.</dd>
+					<dt>Return</dt><dd>Internal pointer to device connection object. Returns NULL if device is not connected.</dd>
+				</dl>
+				<pre><code class='c'>BaseDevice *deviceGetRawDevice (Device *device);</code></pre>
+			</li>
+		</ul>
+	</li>
+</ul>
+</body>
+</html>

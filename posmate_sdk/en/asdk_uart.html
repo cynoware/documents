@@ -1,0 +1,210 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="../sdk.css" />
+<link rel="stylesheet" href="../styles/foundation.css" />
+<script src="../highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+<ul id='main'>
+	<li><div class='title'>Public class</div>
+		<div class='jclass'>com.posmate.<span class='jclassname'>UART</span></div>
+	</li>
+	<li><div class='title'>Constants</div>
+		<pre><code class='java'>public static final int DATABIT_5       = 5;
+public static final int DATABIT_6       = 6;
+public static final int DATABIT_7       = 7;
+public static final int DATABIT_8       = 8;
+public static final int PRRITY_NONE     = 0;
+public static final int PRRITY_ODD      = 1;
+public static final int PRRITY_EVEN     = 2;
+public static final int PRRITY_MARK     = 3;
+public static final int PRRITY_SPACE    = 4;
+public static final int STOPBITS_1      = 1;
+public static final int STOPBITS_2      = 2;
+public static final int STOPBITS_1_5    = 3;</code></pre>
+	</li>
+	<li><div class='title'>Functions</div>
+		<ul>	
+			<li><div class='funcname'>setConfig</div>
+				<div class='description'>
+					Configure UART
+				</div>
+				<dl>
+					<dt>device</dt><dd>the PosMate device.</dd>
+					<dt>uart</dt><dd>UART number</dd>
+					<dt>baudrate</dt><dd>baudrate</dd>
+					<dt>dataBits</dt><dd>data bits</dd>
+					<dt>parity</dt><dd>parity bits</dd>
+					<dt>stopBits</dt><dd>stop bits</dd>
+				<dl>
+				<pre><code class='java'>static void setConfig (Device device, int uart, int baudrate, int dataBits, int parity, int stopBits);</code></pre>
+			</li>
+			<li><div class='funcname'>write</div>
+				<div class='description'>
+					Write data to UART
+				</div>
+				<dl>
+					<dt>device</dt><dd>the PosMate device.</dd>
+					<dt>uart</dt><dd>UART number</dd>
+					<dt>data</dt><dd>the buffer to be written to UART</dd>
+					<dt>offset</dt><dd>from where will write the data</dd>
+					<dt>len</dt><dd>length of the data to be written</dd>
+					<dt>Return</dt><dd>the actual written length</dd>
+				</dl>
+				<pre><code class='java'>static int write (Device device, int uart, byte[] data, int offset, int len);</code></pre>
+			</li>
+			<li><div class='funcname'>write</div>
+				<div class='description'>
+					Write data to UART
+				</div>
+				<dl>
+					<dt>device</dt><dd>the PosMate device.</dd>
+					<dt>uart</dt><dd>UART number</dd>
+					<dt>data</dt><dd>the buffer to be written to UART</dd>
+					<dt>Return</dt><dd>the actual written length</dd>
+				</dl>
+				<pre><code class='java'>static int write (Device device, int uart, byte[] data);</code></pre>
+			</li>
+			<li><div class='funcname'>read</div>
+				<div class='description'>
+					Read data from UART
+				</div>
+				<dl>
+					<dt>device</dt><dd>the PosMate device.</dd>
+					<dt>uart</dt><dd>UART number</dd>
+					<dt>data</dt><dd>the buffer that will receive read data</dd>
+					<dt>offset</dt><dd>from where will save the data</dd>
+					<dt>len</dt><dd>length of the data to be read</dd>
+					<dt>Return</dt><dd>the actual read length</dd>
+				</dl>
+				<pre><code class='java'>static int read (Device device, int uart, byte[] data, int offset, int len);</code></pre>
+			</li>
+			<li><div class='funcname'>read</div>
+				<div class='description'>
+					Read data from UART
+				</div>
+				<dl>
+					<dt>device</dt><dd>the PosMate device.</dd>
+					<dt>uart</dt><dd>UART number</dd>
+					<dt>data</dt><dd>the buffer that will receive read data</dd>
+					<dt>Return</dt><dd>the actual read length</dd>
+				</dl>
+				<pre><code class='java'>static int read (Device device, int uart, byte[] data);</code></pre>
+			</li>
+			<li><div class='funcname'>timedRead</div>
+				<div class='description'>
+					Read data from UART
+				</div>
+				<dl>
+					<dt>device</dt><dd>the PosMate device.</dd>
+					<dt>uart</dt><dd>UART number</dd>
+					<dt>data</dt><dd>the buffer that will receive read data</dd>
+					<dt>offset</dt><dd>from where will save the data</dd>
+					<dt>len</dt><dd>length of the data to be read</dd>
+					<dt>millisecond</dt><dd>timeout to wait the data available</dd>
+					<dt>Return</dt><dd>the actual read length</dd>
+				</dl>
+				<pre><code class='java'>static int timedRead (Device device, int uart, byte[] data, int offset, int len, long millisecond);</code></pre>
+			</li>
+			<li><div class='funcname'>timedRead</div>
+				<div class='description'>
+					Read data from UART
+				</div>
+				<dl>
+					<dt>device</dt><dd>the PosMate device.</dd>
+					<dt>uart</dt><dd>UART number</dd>
+					<dt>data</dt><dd>the buffer that will receive read data</dd>
+					<dt>millisecond</dt><dd>timeout to wait the data available</dd>
+					<dt>Return</dt><dd>the actual read length</dd>
+				</dl>
+				<pre><code class='java'>static int timedRead (Device device, int uart, byte[] data, long millisecond);</code></pre>
+			</li>
+			<li><div class='funcname'>fixedRead</div>
+				<div class='description'>
+					Read data from UART, until the length of data is read or timeout.
+					(function "read" and "timedRead" just return the data and do not care if enough data was read.)
+				</div>
+				<dl>
+					<dt>device</dt><dd>the PosMate device.</dd>
+					<dt>uart</dt><dd>UART number</dd>
+					<dt>data</dt><dd>the buffer that will receive read data</dd>
+					<dt>offset</dt><dd>from where will save the data</dd>
+					<dt>len</dt><dd>length of the data to be read</dd>
+					<dt>millisecond</dt><dd>timeout to wait the data available</dd>
+					<dt>Return</dt><dd>the actual read length</dd>
+				</dl>
+				<pre><code class='java'>static int fixedRead (Device device, int uart, byte[] data, int offset, int len, long millisecond);</code></pre>
+			</li>
+			<li><div class='funcname'>fixedRead</div>
+				<div class='description'>
+					Read data from UART, until the length of data is read or timeout.
+					(function "read" and "timedRead" just return the data and do not care if enough data was read.)
+				</div>
+				<dl>
+					<dt>device</dt><dd>the PosMate device.</dd>
+					<dt>uart</dt><dd>UART number</dd>
+					<dt>data</dt><dd>the buffer that will receive read data</dd>
+					<dt>millisecond</dt><dd>timeout to wait the data available</dd>
+					<dt>Return</dt><dd>the actual read length</dd>
+				</dl>
+				<pre><code class='java'>static int fixedRead (Device device, int uart, byte[] data, long millisecond);</code></pre>
+			</li>            
+			<li><div class='funcname'>fixedWrite</div>
+				<div class='description'>
+					Write data to UART and return after the length of data is writting (or any error).
+					(function "write" just write data and returns immediately and does not care if enough data was written.)
+				</div>
+				<dl>
+					<dt>device</dt><dd>the PosMate device.</dd>
+					<dt>uart</dt><dd>UART number</dd>
+                    <dt>data</dt><dd>the buffer to be written to UART</dd>
+					<dt>offset</dt><dd>from where will write the data</dd>
+					<dt>len</dt><dd>length of the data to be written</dd>
+                    <dt>Return</dt><dd>the actual written length</dd>
+				</dl>
+				<pre><code class='java'>static int fixedWrite (Device device, int uart, byte[] data, int offset, int len);</code></pre>
+			</li>
+			<li><div class='funcname'>fixedWrite</div>
+				<div class='description'>
+					Write data to UART and return after the length of data is writting (or any error).
+					(function "write" just write data and returns immediately and does not care if enough data was written.)
+				</div>
+				<dl>
+					<dt>device</dt><dd>the PosMate device.</dd>
+					<dt>uart</dt><dd>UART number</dd>
+                    <dt>data</dt><dd>the buffer to be written to UART</dd>
+                    <dt>Return</dt><dd>the actual written length</dd>
+				</dl>
+				<pre><code class='java'>static int fixedWrite (Device device, int uart, byte[] data);</code></pre>
+			</li>
+			<li><div class='funcname'>clearBuffer</div>
+				<div class='description'>
+					Clear UART internal buffer
+				</div>
+				<dl>
+					<dt>device</dt><dd>the PosMate device.</dd>
+					<dt>uart</dt><dd>UART number</dd>
+					<dt>clearTx</dt><dd>Indicate if clear Tx buffer.</dd>
+					<dt>clearRx</dt><dd>Indicate if clear Rx buffer.</dd>
+				</dl>
+				<pre><code class='java'>static void clearBuffer (Device device, int uart, boolean clearTx, boolean clearRx);</code></pre>
+			</li>
+			<li><div class='funcname'>clearBuffer</div>
+				<div class='description'>
+					Clear UART internal TX and RX buffer
+				</div>
+				<dl>
+					<dt>device</dt><dd>the PosMate device.</dd>
+					<dt>uart</dt><dd>UART number</dd>
+				</dl>
+				<pre><code class='java'>static void clearBuffer (Device device, int uart);</code></pre>
+			</li>
+		</ul>
+	</li>
+</ul>
+</body>
+</html>

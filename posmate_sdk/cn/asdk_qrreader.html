@@ -1,0 +1,126 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="../sdk.css" />
+<link rel="stylesheet" href="../styles/foundation.css" />
+<script src="../highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+<ul id='main'>
+	<li><div class='title'>公开类</div>
+		<div class='jclass'>com.posmate.<span class='jclassname'>QrReader</span></div>
+	</li>
+	<li><div class='title'>常数</div>
+		<pre><code class='java'>public static final int kTriggerMode_PressKey   = 0x00;
+public static final int kTriggerMode_Continuous = 0x01;
+public static final int kTriggerMode_Auto       = 0x02;
+public static final int kTriggerMode_Respond    = 0x03;
+public static final int kTriggerMode_Wave       = 0x04;</code></pre>
+	</li>    
+	<li><div class='title'>函数</div>
+		<ul>	
+			<li><div class='funcname'>scan</div>
+				<div class='description'>
+					开启二维码扫描读取数据
+				</div>
+				<dl>
+					<dt>device</dt><dd>PosMate设备对象</dd>
+					<dt>uart</dt><dd>uart序号</dd>
+					<dt>buf</dt><dd>读出数据的缓冲区</dd>
+					<dt>offset</dt><dd>读取缓冲区的起始位置</dd>
+					<dt>size</dt><dd>缓冲区长度</dd>
+					<dt>mode</dt><dd>触发模式</dd>
+					<dt>Return</dt><dd>读到的长度</dd>
+				<dl>
+				<pre><code class='java'>static int scan (Device device, int uart, byte[] buf, int offset, int size, int mode);</code></pre>
+			</li>
+			<li><div class='funcname'>scan</div>
+				<div class='description'>
+					开启二维码扫描读取数据
+				</div>
+				<dl>
+					<dt>device</dt><dd>PosMate设备对象</dd>
+					<dt>uart</dt><dd>uart序号</dd>
+					<dt>mode</dt><dd>触发模式</dd>
+					<dt>Return</dt><dd>读到的字符串</dd>
+				<dl>
+				<pre><code class='java'>static String scan (Device device, int uart, int mode);</code></pre>
+			</li>
+			<li><div class='funcname'>scannerExists</div>
+				<div class='description'>
+					判断二维码扫描器的存在
+				</div>
+				<dl>
+					<dt>device</dt><dd>PosMate设备对象</dd>
+					<dt>uart</dt><dd>uart序号</dd>
+					<dt>Return</dt><dd>是否存在二维码设备</dd>
+				</dl>
+				<pre><code class='java'>static boolean scannerExists (Device device, int uart);</code></pre>
+			</li>
+			<li><div class='funcname'>stopScan</div>
+				<div class='description'>
+					停止扫描二维码
+				</div>
+				<dl>
+					<dt>device</dt><dd>PosMate设备对象</dd>
+					<dt>uart</dt><dd>uart序号</dd>
+					<dt>Return</dt><dd>保留</dd>
+				</dl>
+				<pre><code class='java'>static int stopScan (Device device, int uart);</code></pre>
+			</li>
+			<li><div class='funcname'>setScanTriggerMode</div>
+				<div class='description'>
+					设置扫码器的触发条件
+				</div>
+				<dl>
+					<dt>device</dt><dd>PosMate设备对象</dd>
+					<dt>uart</dt><dd>uart序号</dd>
+					<dt>mode</dt><dd>触发模式</dd>
+					<dt>Return</dt><dd>保留</dd>
+				<dl>
+				<pre><code class='java'>static int setScanTriggerMode(Device device, int uart, int mode);</code></pre>
+			</li>
+		</ul>
+	</li>
+
+    <li>
+        <div class='title'>示例代码</div>
+        <pre>
+        <code class='c'>boolean qrflag = true;
+
+public void startQRCode(Device baseDevice) {
+    	
+    try{
+        qrflag = true;
+        while(qrflag){
+            String str = QrReader.scan(baseDevice, config.CONFIG_DOCK_QRREADER_UART);
+            if(str.trim().length() <= 2){
+                str = "";
+            }
+            if (str != null && str.length() > 0) {
+                QrReader.stopScan(baseDevice, config.CONFIG_DOCK_QRREADER_UART);
+                break;
+            }
+        }
+    }catch(Exception ex){
+        ex.printStackTrace();
+        QrReader.stopScan(baseDevice, config.CONFIG_DOCK_QRREADER_UART);
+    }
+}
+
+public void stopQRCode(Device baseDevice) {
+    try{
+    	QrReader.stopScan(baseDevice, config.CONFIG_DOCK_QRREADER_UART);
+        qrflag = false;
+    }
+    catch(Exception ex){
+        ex.printStackTrace();
+    }
+}</code></pre>
+    </li>
+</ul>
+</body>
+</html>

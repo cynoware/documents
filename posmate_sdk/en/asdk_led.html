@@ -1,0 +1,91 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../sdk.css" />
+    <link rel="stylesheet" href="../styles/foundation.css" />
+    <script src="../highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+    <ul id='main'>
+        <li>
+            <div class='title'>Introduction</div>
+            We can use UART to drive LED customer display. After configure the baudrate of LED's UART,
+            we can show the data by writing the LED's UART instruction.<br />
+            (The following is for demo only. Other LEDs may have different baudrate and intructions.)<br />
+            &nbsp;<br />
+        </li>
+
+        <li>
+            <div class='title'>Example</div>
+            <pre>
+            <code class='c'>String[] ledtitle = new String[]{"price","total","collect","givechange","Init"};
+
+public void testLed(Device baseDevice){
+    byte[] price = null;
+    int uart_num = 0;
+    	
+    uart_num = config.CONFIG_ONBOARD_LED_UART; //config.CONFIG_ONBOARD_LED_UART = 6
+    	
+    if(ledtitle[titleindex].equalsIgnoreCase("price")){
+    	price = new byte[]{0x1B,0x73,0x31};
+    }
+    else if(ledtitle[titleindex].equalsIgnoreCase("total")){
+    	price = new byte[]{0x1B, 0x73, 0x32};
+    }
+    else if(ledtitle[titleindex].equalsIgnoreCase("collect")){
+    	price = new byte[]{0x1B, 0x73, 0x33};
+    }
+    else if(ledtitle[titleindex].equalsIgnoreCase("givechange")){
+    	price = new byte[]{0x1B, 0x73, 0x34};
+    }
+    else{//Init
+    	price = new byte[]{0x1B, 0x40, 0x0C};
+    }
+    	
+    UART.setConfig(baseDevice, uart_num, 2400, 8, UART.PRRITY_NONE, UART.STOPBITS_1);
+    	 
+    UART.fixedWrite(baseDevice, uart_num, new byte[]{0x1B, 0x40});
+    if(led_sel != true){
+    	msleep(500);
+    }
+
+    UART.fixedWrite(baseDevice, uart_num, price);
+
+    if(led_sel != true){
+        msleep(500);
+    }
+
+    if(showtxt.length() > 0){
+        if(showtxt.length() < 8){
+            int chars = 8-showtxt.length();
+            for(int i = 0;i < chars;i++){
+                showtxt=" " + showtxt;
+            }
+        }
+
+        UART.fixedWrite(baseDevice, uart_num, new byte[]{0x1B, 0x51, 0x41});
+            
+        if(led_sel !=true){
+            msleep(100);
+        }
+
+        UART.write(baseDevice, uart_num, showtxt.getBytes());
+        UART.write(baseDevice, uart_num, new byte[]{0x0D});
+    }
+}
+
+public boolean msleep(long time){
+    try {
+        Thread.sleep(time);
+    } catch (InterruptedException e) {
+        return false;
+    }
+    return true;
+}</code></pre>
+        </li>
+    </ul>
+</body>
+</html>

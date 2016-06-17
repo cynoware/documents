@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="../sdk.css" />
+<link rel="stylesheet" href="../styles/foundation.css" />
+<script src="../highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+<ul id='main'>
+	<li><div class='title'>简介</div>
+		可以通过输出GPIO上的电平，实现打开钱箱的功能。具体步骤为，向钱箱的连线上输出高电平，等待200毫秒后，再输出低电平。<br/>
+		&nbsp;<br/>
+	</li>
+	<li><div class='title'>示例代码</div>
+		<pre><code class='c'>#include "posmate.h"
+#include "config.h"
+
+//Example of cash drawer --
+//This demo shows how to open cash draw by GPIO
+
+int mainCashDrawer(int deviceMask, int argc, char **argv) {
+    Device *device = deviceNew();
+    deviceDetect(device, deviceMask);
+    if (deviceGetRawDevice(device) != NULL) {
+        
+        //Set GPIO to output mode
+        gpioSetMode(device, CONFIG_CASHDRAWER_GPIO, GPIOMode_Output, 0);
+
+        //Drive GPIO to open cash drawer
+        gpioOutput(device, CONFIG_CASHDRAWER_GPIO, 1);
+        xsleep(200);
+        gpioOutput(device, CONFIG_CASHDRAWER_GPIO, 0);
+    }
+    deviceFree(device);
+    return 0;
+}</code></pre>
+	</li>
+</ul>
+</body>
+</html>

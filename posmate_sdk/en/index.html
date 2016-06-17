@@ -1,0 +1,130 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<style type="text/css">
+html,body{
+    width:100%;
+    height:100%;
+    margin:0;
+    padding:0;
+    overflow:hidden;
+}
+.main {
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:0;
+    margin-bottom:0;
+    padding:0;
+    font-size:12px;
+    1max-width:960px;
+    height:100%;
+    width:100%;
+}
+
+#col0 #col1, #col2 {
+position:relative;
+overflow:hidden;
+}
+
+#col0 {
+float:left;
+left:0;
+width:0;
+background-color:white;
+padding: 0px;
+}
+
+#col1 {
+float:left;
+width:250px;
+height:100%;
+left:0%;
+}
+
+#col2 {
+float:left;
+width:calc(100% - 250px);
+height:100%;
+left:0;
+}
+
+#back{
+    display: block;
+    visibility: hidden;
+    padding: 7px 7px 7px 7px;
+    background-color: #2E72AB;
+    color: white;
+    font-weight:bold; 
+    font-family: Lato, proxima-nova, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 14px;
+    text-decoration:none;
+}
+
+#menu, #content{
+    left: 0px;
+    top: 0px;
+    height: 100%;
+    width: 100%;
+    border: 0;
+    margin: 0;
+}
+
+@media only screen and (max-width:768px){
+    #col0{
+        width:100%;
+    }
+    #col1{
+        width:0px;
+        clear:left;
+
+    }
+    #col2{
+        width:100%;
+    }
+    #back{
+        visibility: visible;
+    }
+}
+
+</style>
+</head>
+<body>
+<div class='main'>
+<div id='col0'>
+<a id='back' href='menu.html?single'>&lt; Back to menu</a>
+</div>
+<div id='col1'>
+<iframe id='menu' name='menu' src='menu.html' frameborder='0'></iframe>
+</div>
+<div id='col2'>
+<iframe id='content' name='content' src='get_start.html' frameborder='0'></iframe>
+<script>
+if(location.search){
+    var url = location.search.substr(1);
+    url = url.replace(/^[^?]*\?/, '');
+    if(location.hash) url += location.hash;
+    document.getElementById('content').src = url;
+}
+
+try{
+    console.log('\u4f5c\u8005QQ 9608662 (\u9152\u9b3c), \u5168\u6808\u5de5\u7a0b\u5e08\n\u4e3b\u9875 https:\x2F\x2Fgithub.com\x2Fxhawk18\n\u53ef\u9a6d\u5404\u79cd\u7cfb\u7edf\u53ca\u7591\u96be\u6742\u75c7\uff0c\nlinux,windows,\u5d4c\u5165\u5f0fmcu,\u5b89\u5353,\u7f51\u7edc,html\u524d\u7aef,nodejs\uff0c\u6765\u8005\u4e0d\u62d2\u3002\n\u64c5\u957f\u63a8\u8fdb\u5404\u79cd\u8de8\u754c\u9879\u76ee\uff0c\u6b22\u8fce\u4ea4\u6d41\uff0c\n\u52a0\u597d\u53cb\u6ce8\u660e "\u6765\u81eaPosMate\u9879\u76ee\u3002"');
+}catch(e){}
+</script>
+<!--[if lt IE 9]><script>
+function adjustSize(){
+var col2 = document.getElementById('col2');
+var col1 = document.getElementById('col1');
+//col2.style.width = document.body.s
+col2.style.width = (document.body.offsetWidth - col1.offsetWidth) + 'px';
+col2.style.height = '100%';
+}
+window.onresize = adjustSize;
+adjustSize();
+</script><![endif]-->
+</div>
+</div>
+</body>
+</html>

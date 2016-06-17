@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="../sdk.css" />
+<link rel="stylesheet" href="../styles/foundation.css" />
+<script src="../highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+<ul id='main'>
+	<li><div class='title'>公开类</div>
+		<div class='jclass'>com.posmate.<span class='jclassname'>BT</span></div>
+	</li>
+	<li><div class='title'>函数</div>
+		<ul>	
+			<li><div class='funcname'>getMac</div>
+				<div class='description'>
+					读取BT芯片的MAC地址。
+					此命令如果返回全0，则说明BT芯片尚未报告MAC地址，需要延后再读
+				</div>
+				<dl>
+					<dt>device</dt><dd>PosMate设备对象</dd>
+					<dt>mac</dt><dd>返回蓝牙MAC地址</dd>
+				<dl>
+				<pre><code class='java'>static void getMac (Device device, byte[] mac);</code></pre>
+			</li>
+			<li><div class='funcname'>macToSn</div>
+				<div class='description'>
+					将MAC地址转为BT产品的序列号。
+					BT设备名将是 "PM 六位序列号, 例如 "PM123456"。
+				</div>
+				<dl>
+					<dt>mac</dt><dd>蓝牙MAC地址</dd>
+					<dt>Return</dt><dd>实际写出的长度</dd>
+				</dl>
+				<pre><code class='java'>static int macToSn (byte[] mac);</code></pre>
+			</li>
+		</ul>
+	</li>
+</ul>
+</body>
+</html>

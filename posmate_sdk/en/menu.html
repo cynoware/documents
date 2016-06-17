@@ -1,0 +1,123 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style>
+body{
+    background-color: white;
+	font-family: Lato, proxima-nova, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 14px;
+}
+
+#menu li{
+    list-style: none;
+    margin-left: -20px;
+}
+
+#menu li a{
+    color: #00589c;
+}
+
+#menu>li{
+    margin-bottom: 20px;
+}
+</style>
+</head>
+<body>
+<base target="content">
+<ul id='menu'>
+
+<li><a href='get_start.html'>Get started</a></li>
+<li>Demo applications
+    <ul>
+        <li><a href='examples.html'>for Windows console</a></li>
+        <li><a href='examples.html'>for Windows GUI</a></li>
+        <li><a href='examples.html'>for Android</a></li>
+    </ul>
+</li>
+
+<li>Windows SDK reference
+    <ul>
+        <li><a href='wsdk_device.html'>Device Connection</a></li>
+        <li><a href='wsdk_uart.html'>UART</a></li>
+        <li><a href='wsdk_bluetooth.html'>Bluetooth</a></li>
+        <li><a href='wsdk_gpio.html'>GPIO</a></li>
+        <li><a href='wsdk_keyboard.html'>Keyboard</a></li>
+        <li><a href='wsdk_qrreader.html'>QR reader</a></li>
+        <li><a href='wsdk_printer.html'>Ticket Printer</a></li>
+        <li><a href='wsdk_led.html'>LED Customer Display</a></li>
+        <li><a href='wsdk_cashdrawer.html'>Cash Drawer</a></li>
+        <li><a href='wsdk_payment.html'>Payment</a></li>
+    </ul>
+</li>
+<li>Android SDK reference
+	<ul>
+        <li>Device Connection
+            <ul>
+                <li><a href='asdk_usb_device.html'>USB Connection</a></li>
+                <li><a href='asdk_bt_device.html'>Bluetooth Connection</a></li>
+            </ul>
+        </li>
+        <li><a href='asdk_uart.html'>UART</a></li>
+        <li><a href='asdk_bluetooth.html'>Bluetooth</a></li>
+        <li><a href='asdk_gpio.html'>GPIO</a></li>
+        <li><a href='asdk_keyboard.html'>Keyboard</a></li>
+        <li><a href='asdk_qrreader.html'>QR reader</a></li>
+        <li><a href='asdk_printer.html'>Ticket Printer</a></li>
+        <li><a href='asdk_led.html'>LED Customer Display</a></li>
+        <li><a href='asdk_cashdrawer.html'>Cash Drawer</a></li>
+        <li><a href='asdk_payment.html'>Payment</a></li>
+    </ul>
+</li>
+<!--
+<li>Javascript SDK reference
+    <br/>to do ...
+    <ul>
+        <li><a href='jsdk_device.html'>Device Connection</a></li>
+        <li><a href='jsdk_uart.html'>UART</a></li>
+        <li><a href='jsdk_bluetooth.html'>Bluetooth</a></li>
+        <li><a href='jsdk_gpio.html'>GPIO</a></li>
+        <li><a href='jsdk_keyboard.html'>Keyboard</a></li>
+        <li><a href='jsdk_qrreader.html'>QR reader</a></li>
+    </ul>
+</li>
+-->
+</ul>
+</body>
+<script>
+var single = (location.search && (location.search + '').match(/single/));
+var a = document.getElementsByTagName('a');
+for(var i = 0; i < a.length; ++i){
+    (function(){
+        var href = a[i].href;
+        a[i].href = '#';
+        function goto_url(){
+            if(single)
+                location = 'index.html?' + href;
+            else
+                try{
+                    parent.document.frames.content.location = href;
+                }catch(err){
+                    parent.location = 'index.html?' + Math.random() + '?' + href;
+                }
+            return false;
+        }
+        
+        if(a[i].addEventListener)
+            a[i].addEventListener('click', function(event){
+                if(event && event.preventDefault){
+                    event.preventDefault();
+                }
+                goto_url();
+                return false;
+            });
+        else
+            a[i].attachEvent('onclick', function(event){
+                goto_url();
+                return false;
+            })
+    })();
+}
+</script>
+</html>

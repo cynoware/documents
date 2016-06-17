@@ -1,0 +1,134 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="../sdk.css" />
+<link rel="stylesheet" href="../styles/foundation.css" />
+<script src="../highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+<ul id='main'>
+	<li><div class='title'>枚举值</div>
+		<pre><code class='c'>typedef enum {
+	UARTParity_None		= 0,
+	UARTParity_Odd		= 1,
+	UARTParity_Even		= 2,
+	UARTParity_Mark		= 3,
+	UARTParity_Space	= 4
+} UARTParity;
+
+typedef enum {
+	UARTStopBits_1		= 1,
+	UARTStopBits_2		= 2,
+	UARTStopBits_1_5	= 3
+} UARTStopBits;
+
+typedef enum {
+	UARTDataBits_5		= 5,
+	UARTDataBits_6		= 6,
+	UARTDataBits_7		= 7,
+	UARTDataBits_8		= 8
+} UARTDataBits;</code></pre>
+	</li>
+	<li><div class='title'>函数</div>
+		<ul>	
+			<li><div class='funcname'>uartSetConfig</div>
+				<div class='description'>
+					配置UART
+				</div>
+				<dl>
+					<dt>device</dt><dd>指向PosMate设备的指针</dd>
+					<dt>uart</dt><dd>uart序号</dd>
+					<dt>baudrate</dt><dd>波特率</dd>
+					<dt>dataBits</dt><dd>数据位</dd>
+					<dt>parity</dt><dd>奇偶校验</dd>
+					<dt>stopBits</dt><dd>停止位</dd>
+				<dl>
+				<pre><code class='c'>void uartSetConfig (Device *device, uint32_t uart, uint32_t baudrate, UARTDataBits dataBits, UARTParity parity, UARTStopBits stopBits);</code></pre>
+			</li>
+			<li><div class='funcname'>uartWrite</div>
+				<div class='description'>
+					写UART
+				</div>
+				<dl>
+					<dt>device</dt><dd>指向PosMate设备的指针</dd>
+					<dt>uart</dt><dd>uart序号</dd>
+					<dt>buf</dt><dd>要写的缓冲区</dd>
+					<dt>len</dt><dd>缓冲区长度</dd>
+					<dt>返回</dt><dd>实际写出的长度</dd>
+				</dl>
+				<pre><code class='c'>uint32_t uartWrite (Device *device, uint32_t uart, const char *data, size_t len);</code></pre>
+			</li>
+			<li><div class='funcname'>uartRead</div>
+				<div class='description'>
+					读UART
+				</div>
+				<dl>
+					<dt>device</dt><dd>指向PosMate设备的指针</dd>
+					<dt>uart</dt><dd>uart序号</dd>
+					<dt>buf</dt><dd>要读入的缓冲区</dd>
+					<dt>len</dt><dd>缓冲区长度</dd>
+					<dt>返回</dt><dd>读到的长度</dd>
+				</dl>
+				<pre><code class='c'>uint32_t uartRead (Device *device, uint32_t uart, char *data, size_t len);</code></pre>
+			</li>
+			<li><div class='funcname'>uartTimedRead</div>
+				<div class='description'>
+					读UART
+				</div>
+				<dl>
+					<dt>device</dt><dd>指向PosMate设备的指针</dd>
+					<dt>uart</dt><dd>uart序号</dd>
+					<dt>buf</dt><dd>要读入的缓冲区</dd>
+					<dt>len</dt><dd>缓冲区长度</dd>
+					<dt>millisecond</dt><dd>最大超时时间</dd>
+					<dt>返回</dt><dd>读到的长度</dd>
+				</dl>
+				<pre><code class='c'>uint32_t uartTimedRead (Device *device, uint32_t uart, char *data, size_t len, unsigned int millisecond);</code></pre>
+			</li>
+			<li><div class='funcname'>uartFixedRead</div>
+				<div class='description'>
+					读UART，直到读到指定长度或超时。相对来说，uartRead, uartTimedRead只要有数据就会返回，不管数据有多长。
+				</div>
+				<dl>
+					<dt>device</dt><dd>指向PosMate设备的指针</dd>
+					<dt>uart</dt><dd>uart序号</dd>
+					<dt>buf</dt><dd>要读入的缓冲区</dd>
+					<dt>len</dt><dd>缓冲区长度</dd>
+					<dt>millisecond</dt><dd>最大超时时间</dd>
+					<dt>返回</dt><dd>读到的长度</dd>
+				</dl>
+				<pre><code class='c'>uint32_t uartFixedRead (Device *device, uint32_t uart, char *data, size_t len, unsigned int millisecond);</code></pre>
+			</li>
+			<li><div class='funcname'>uartFixedWrite</div>
+				<div class='description'>
+					写UART，直到写入指定长度或超时。相对来说，uartWrite不保证完全写完。
+				</div>
+				<dl>
+					<dt>device</dt><dd>指向PosMate设备的指针</dd>
+					<dt>uart</dt><dd>uart序号</dd>
+					<dt>buf</dt><dd>要写入的缓冲区</dd>
+					<dt>len</dt><dd>缓冲区长度</dd>
+					<dt>返回</dt><dd>写入的长度</dd>
+				</dl>
+				<pre><code class='c'>uint32_t uartFixedWrite (Device *device, uint32_t uart, const char *data, size_t len);</code></pre>
+			</li>
+			<li><div class='funcname'>uartClearBuffer</div>
+				<div class='description'>
+					清空UART缓冲区
+				</div>
+				<dl>
+					<dt>device</dt><dd>指向PosMate设备的指针</dd>
+					<dt>uart</dt><dd>uart序号</dd>
+					<dt>clearTx</dt><dd>是否清空发送缓冲区</dd>
+					<dt>clearRx</dt><dd>是否清空接收缓冲区</dd>
+				</dl>
+				<pre><code class='c'>void uartClearBuffer (Device *device, uint32_t uart, BOOL clearTx, BOOL clearRx);</code></pre>
+			</li>
+		</ul>
+	</li>
+</ul>
+</body>
+</html>

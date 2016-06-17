@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="../sdk.css" />
+<link rel="stylesheet" href="../styles/default.css" />
+<script src="../highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+<ul id='main'>
+	<li><div class='title'>公开类</div>
+		<div class='jclass'>com.posmate.<span class='jclassname'>HidDevice</span><br/>
+		extends Device</div>
+	</li>
+	<li><div class='title'>常数</div>
+		<pre><code class='java'>public static final String ACTION_USB_PERMISSION = "com.cynoware.posmate.USB_PERMISSION";
+public static final String INTERNAL_NAME_DOCK    = "PosMate";
+public static final String INTERNAL_NAME_FRAME   = "PMFrame";
+</code></pre>
+	</li>    
+	<li><div class='title'>函数</div>
+		<ul>	
+			<li><div class='funcname'>HidDevice</div>
+				<div class='description'>
+					构造一个 HidDevice 对象。
+				</div>
+				<dl>
+					<dt>context</dt><dd>关联的 Activity 上下文</dd>
+				</dl>                
+				<pre><code class='java'>HidDevice (Context context);</code></pre>
+			</li>
+			<li><div class='funcname'>detectUsb</div>
+				<div class='description'>
+					检测并初始化PosMate的USB连接。当检测到USB连接后，用户程序将接收到一个名为ACTION_USB_PERMISSION的广播信息。
+				</div>
+				<dl>
+					<dt>context</dt><dd>关联的 Activity 上下文</dd>
+				</dl>
+				<pre><code class='java'>static void detectUsb (Context context);</code></pre>
+			</li>
+			<li><div class='funcname'>openUsb</div>
+				<div class='description'>
+					打开一个USB设备，该函数应该在用户程序接收到ACTION_USB_PERMISSION的广播信息后执行。
+				</div>
+				<dl>
+					<dt>context</dt><dd>关联的 Activity 上下文</dd>
+					<dt>usbDevice</dt><dd>将要被打开的USB设备</dd>
+					<dt>Return</dt><dd>被打开的USB设备句柄</dd>
+				</dl>
+				<pre><code class='java'>static HidHandler openUsb (Context context, UsbDevice usbDevice);</code></pre>
+			</li>
+			<li><div class='funcname'>setHandler</div>
+				<div class='description'>
+					设置PosMate架构所使用的USB设备句柄
+				</div>
+				<dl>
+					<dt>handler</dt><dd>USB设备的句柄</dd>
+				</dl>
+				<pre><code class='java'>void setHandler (HidHandler handler);</code></pre>
+			</li>
+			<li><div class='funcname'>isConnected</div>
+				<div class='description'>
+					检查USB设备是否已经连接
+				</div>
+				<dl>
+					<dt>Return</dt><dd>如果已经连接上，返回true，否则返回false。</dd>
+				</dl>
+				<pre><code class='java'>boolean isConnected ();</code></pre>
+			</li>
+		</ul>
+	</li>
+</ul>
+</body>
+</html>

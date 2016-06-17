@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="../sdk.css" />
+<link rel="stylesheet" href="../styles/foundation.css" />
+<script src="../highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+<ul id='main'>
+	<li><div class='title'>Functions</div>
+		<ul>	
+			<li><div class='funcname'>btGetMac </div>
+				<div class='description'>
+					Read MAC address of bluetooth.
+					If this API returns MAC with all zero, please call it again after 2 seconds.
+				</div>
+				<dl>
+					<dt>device</dt><dd>Pointer to the PosMate device.</dd>
+					<dt>mac</dt><dd>Returns MAC address.</dd>
+				<dl>
+				<pre><code class='c'>void btGetMac (Device *device, uint8_t mac[6]);</code></pre>
+			</li>
+			<li><div class='funcname'>btMacToSn</div>
+				<div class='description'>
+					Convert MAC address to PosMate serial number.
+					The bluetooth device name will be "PM" + 6 bytes of serial number, such as "PM123456".
+				</div>
+				<dl>
+					<dt>mac</dt><dd>bluetooth MAC address</dd>
+					<dt>Return</dt><dd>serial number</dd>
+				</dl>
+				<pre><code class='c'>uint32_t btMacToSn (const uint8_t mac[6]);</code></pre>
+			</li>
+		</ul>
+	</li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="../sdk.css" />
+<link rel="stylesheet" href="../styles/foundation.css" />
+<script src="../highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+<ul id='main'>
+	<li><div class='title'>函数</div>
+		<ul>	
+			<li><div class='funcname'>keyboardInputKey</div>
+				<div class='description'>
+					通知设备产生一个键盘输出序列
+				</div>
+				<dl>
+					<dt>device</dt><dd>指向PosMate设备的指针</dd>
+					<dt>key</dt><dd>输出序列, 值为usb hid的modifier（高字节），和scancode（低字节）</dd>
+					<dt>count</dt><dd>输出序列长度</dd>
+					<dt>返回</dt><dd>实际产生键盘事件的长度</dd>
+				<dl>
+				<pre><code class='c'>int keyboardInputKey (Device *device, uint16_t *key, size_t count);</code></pre>
+			</li>
+			<li><div class='funcname'>keyboardInputStringEx</div>
+				<div class='description'>
+					通知设备产生一个键盘输出序列
+				</div>
+				<dl>
+					<dt>device</dt><dd>指向PosMate设备的指针</dd>
+					<dt>str</dt><dd>要通过键盘输出的字符串</dd>
+					<dt>count</dt><dd>输出字符串长度</dd>
+					<dt>返回</dt><dd>实际产生键盘事件的长度</dd>
+				<dl>
+				<pre><code class='c'>int keyboardInputStringEx (Device *device, const char *str, size_t count);</code></pre>
+			</li>
+			<li><div class='funcname'>keyboardInputStringEx</div>
+				<div class='description'>
+					通知设备产生一个键盘输出序列
+				</div>
+				<dl>
+					<dt>device</dt><dd>指向PosMate设备的指针</dd>
+					<dt>str</dt><dd>要通过键盘输出的字符串</dd>
+					<dt>返回</dt><dd>实际产生键盘事件的长度</dd>
+				<dl>
+				<pre><code class='c'>int keyboardInputString (Device *device, const char *str);</code></pre>
+			</li>
+		</ul>
+	</li>
+</ul>
+</body>
+</html>

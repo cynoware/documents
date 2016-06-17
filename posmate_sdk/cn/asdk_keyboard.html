@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="../sdk.css" />
+<link rel="stylesheet" href="../styles/foundation.css" />
+<script src="../highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+<ul id='main'>
+	<li><div class='title'>公开类</div>
+		<div class='jclass'>com.posmate.<span class='jclassname'>Keyboard</span></div>
+	</li>
+	<li><div class='title'>函数</div>
+		<ul>	
+			<li><div class='funcname'>inputKey</div>
+				<div class='description'>
+					通知设备产生一个键盘输出序列
+				</div>
+				<dl>
+					<dt>device</dt><dd>PosMate设备对象</dd>
+					<dt>key</dt><dd>输出序列, 值为usb hid的modifier（高字节），和scancode（低字节）</dd>
+					<dt>offset</dt><dd>要输出序列缓冲区中的起始位置</dd>
+					<dt>count</dt><dd>输出序列长度</dd>
+					<dt>Return</dt><dd>实际产生键盘事件的长度</dd>
+				<dl>
+				<pre><code class='java'>static int inputKey (Device device, int[] key, int offset, int count);</code></pre>
+			</li>
+			<li><div class='funcname'>inputKey</div>
+				<div class='description'>
+					通知设备产生一个键盘输出序列
+				</div>
+				<dl>
+					<dt>device</dt><dd>PosMate设备对象</dd>
+					<dt>key</dt><dd>输出序列, 值为usb hid的modifier（高字节），和scancode（低字节）</dd>
+					<dt>Return</dt><dd>实际产生键盘事件的长度</dd>
+				<dl>
+				<pre><code class='java'>static int inputKey (Device device, int[] key);</code></pre>
+			</li>
+			<li><div class='funcname'>inputString</div>
+				<div class='description'>
+					通知设备产生一个键盘输出序列
+				</div>
+				<dl>
+					<dt>device</dt><dd>PosMate设备对象</dd>
+					<dt>bytes</dt><dd>要通过键盘输出的字符数组</dd>
+                    <dt>offset</dt><dd>要输出的字符数组中的起始位置</dd>
+					<dt>count</dt><dd>输出字符数组的长度</dd>
+					<dt>Return</dt><dd>实际产生键盘事件的长度</dd>
+				<dl>
+				<pre><code class='java'>static int inputString (Device device, byte[] bytes, int offset, int len);</code></pre>
+			</li>
+			<li><div class='funcname'>inputString</div>
+				<div class='description'>
+					通知设备产生一个键盘输出序列
+				</div>
+				<dl>
+					<dt>device</dt><dd>PosMate设备对象</dd>
+					<dt>bytes</dt><dd>要通过键盘输出的字符数组</dd>
+					<dt>Return</dt><dd>实际产生键盘事件的长度</dd>
+				<dl>
+				<pre><code class='java'>static int inputString (Device device, byte[] bytes);</code></pre>
+			</li>
+			<li><div class='funcname'>inputString</div>
+				<div class='description'>
+					通知设备产生一个键盘输出序列
+				</div>
+				<dl>
+					<dt>device</dt><dd>PosMate设备对象</dd>
+					<dt>str</dt><dd>要通过键盘输出的字符串</dd>
+					<dt>Return</dt><dd>实际产生键盘事件的长度</dd>
+				<dl>
+				<pre><code class='java'>static int inputString (Device device, String str);</code></pre>
+			</li>
+
+		</ul>
+	</li>
+</ul>
+</body>
+</html>

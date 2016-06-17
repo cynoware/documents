@@ -1,0 +1,108 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="../sdk.css" />
+<link rel="stylesheet" href="../styles/foundation.css" />
+<script src="../highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+<ul id='main'>
+	<li><div class='title'>Enumerations</div>
+		<pre><code class='c'>typedef enum {
+    kTriggerMode_PressKey   = '\x00',
+    kTriggerMode_Continuous = '\x01',
+    kTriggerMode_Auto       = '\x02',
+    kTriggerMode_Respond    = '\x03',
+    kTriggerMode_Wave       = '\x04',
+} TriggerMode;</code></pre>
+	</li>
+	<li><div class='title'>Functions</div>
+		<ul>	
+			<li><div class='funcname'>scan</div>
+				<div class='description'>
+					Open the Qr reader and scan the data
+				</div>
+				<dl>
+					<dt>device</dt><dd>Pointer to the PosMate device.</dd>
+					<dt>uart</dt><dd>UART number</dd>
+					<dt>buf</dt><dd>the buffer that will receive read data</dd>
+					<dt>size</dt><dd>length of buffer</dd>
+                    <dt>mode</dt><dd>the trigger mode</dd>
+					<dt>Return</dt><dd>the actual read length</dd>
+				<dl>
+				<pre><code class='c'>int scan (Device *device, uint32_t uart, char *buf, size_t size, TriggerMode mode);</code></pre>
+			</li>
+			<li><div class='funcname'>scannerExists</div>
+				<div class='description'>
+					Check if Qr reader is connected or not
+				</div>
+				<dl>
+					<dt>device</dt><dd>Pointer to the PosMate device.</dd>
+					<dt>uart</dt><dd>UART number</dd>
+					<dt>Return</dt><dd>TRUE if Qr reader is connected, otherwise FALSE.</dd>
+				</dl>
+				<pre><code class='c'>BOOL scannerExists (Device *device, uint32_t uart);</code></pre>
+			</li>
+			<li><div class='funcname'>stopScan</div>
+				<div class='description'>
+					Stop scanning
+				</div>
+				<dl>
+					<dt>device</dt><dd>Pointer to the PosMate device.</dd>
+					<dt>uart</dt><dd>UART number</dd>
+					<dt>Return</dt><dd>reserved</dd>
+				</dl>
+				<pre><code class='c'>int stopScan (Device *device, uint32_t uart);</code></pre>
+			</li>
+			<li><div class='funcname'>setScanTriggerMode</div>
+				<div class='description'>
+					Set trigger mode of scanner
+				</div>
+				<dl>
+					<dt>device</dt><dd>Pointer to the PosMate device.</dd>
+					<dt>uart</dt><dd>UART number</dd>
+                    <dt>mode</dt><dd>The trigger mode</dd>
+					<dt>Return</dt><dd>reserved</dd>
+				<dl>
+				<pre><code class='c'>int setScanTriggerMode(Device *device, uint32_t uart, TriggerMode mode);</code></pre>
+			</li>
+		</ul>
+	</li>
+	<li><div class='title'>Example</div>
+		<pre><code class='c'>int mainScanStart(int deviceMask, int argc, char **argv) {
+    Device *device = deviceNew();
+    deviceMask = deviceDetect(device, deviceMask);
+    int uart = (deviceMask == DEVICE_DETECT_FRAME_USB ?
+        CONFIG_FRAME_QRREADER_UART : CONFIG_DOCK_QRREADER_UART);
+
+    if (scannerExists(device, uart)) {
+        char result[512];
+        int size;
+
+        setScanTriggerMode(device, uart, kTriggerMode_Respond);
+        //setScanBeep(device, uart, 2);
+
+        while (1) {
+            size = scan(device, uart, result, sizeof(result), kTriggerMode_Respond);
+            if (size < 0)
+                break;
+            else if (size == 0)
+                continue;
+            else {
+                keyboardInputString(device, result);
+                keyboardInputString(device, "\n");
+            }
+        }
+    }
+    deviceFree(device);
+    return 0;
+
+    return EXIT_SUCCESS;
+}</code></pre>
+	</li>
+</ul>
+</body>
+</html>

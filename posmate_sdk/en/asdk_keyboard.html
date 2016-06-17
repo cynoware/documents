@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="../sdk.css" />
+<link rel="stylesheet" href="../styles/foundation.css" />
+<script src="../highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+<ul id='main'>
+	<li><div class='title'>Public class</div>
+		<div class='jclass'>com.posmate.<span class='jclassname'>Keyboard</span></div>
+	</li>
+	<li><div class='title'>Functions</div>
+		<ul>	
+			<li><div class='funcname'>inputKey</div>
+				<div class='description'>
+					Notify the PosMate device to output data as a keyboard
+				</div>
+				<dl>
+					<dt>device</dt><dd>the PosMate device.</dd>
+					<dt>key</dt><dd>The output keyboard event data, which values are modifier (high bytes) and scancode (low bytes) in usb hid.</dd>
+					<dt>offset</dt><dd>offset in the key array</dd>
+					<dt>count</dt><dd>length of keyboard event</dd>
+					<dt>Return</dt><dd>the actual output length of keyboard event</dd>
+				<dl>
+				<pre><code class='java'>static int inputKey (Device device, int[] key, int offset, int count);</code></pre>
+			</li>
+			<li><div class='funcname'>inputKey</div>
+				<div class='description'>
+					Notify the PosMate device to output data as a keyboard
+				</div>
+				<dl>
+					<dt>device</dt><dd>the PosMate device.</dd>
+					<dt>key</dt><dd>The output keyboard event data, which values are modifier (high bytes) and scancode (low bytes) in usb hid.</dd>
+					<dt>Return</dt><dd>the actual output length of keyboard event</dd>
+				<dl>
+				<pre><code class='java'>static int inputKey (Device device, int[] key);</code></pre>
+			</li>
+			<li><div class='funcname'>inputString</div>
+				<div class='description'>
+					Notify the PosMate device to output data as a keyboard
+				</div>
+				<dl>
+					<dt>device</dt><dd>the PosMate device.</dd>
+					<dt>bytes</dt><dd>the output string from PosMate keyboard</dd>
+                    <dt>offset</dt><dd>offset in the byte array of the string</dd>
+					<dt>count</dt><dd>length of output string</dd>
+					<dt>Return</dt><dd>the actual output length of keyboard event</dd>
+				<dl>
+				<pre><code class='java'>static int inputString (Device device, byte[] bytes, int offset, int len);</code></pre>
+			</li>
+			<li><div class='funcname'>inputString</div>
+				<div class='description'>
+					Notify the PosMate device to output data as a keyboard
+				</div>
+				<dl>
+					<dt>device</dt><dd>the PosMate device.</dd>
+					<dt>bytes</dt><dd>the output string from PosMate keyboard</dd>
+					<dt>Return</dt><dd>the actual output length of keyboard event</dd>
+				<dl>
+				<pre><code class='java'>static int inputString (Device device, byte[] bytes);</code></pre>
+			</li>
+			<li><div class='funcname'>inputString</div>
+				<div class='description'>
+					Notify the PosMate device to output data as a keyboard
+				</div>
+				<dl>
+					<dt>device</dt><dd>the PosMate device.</dd>
+					<dt>str</dt><dd>the output string from PosMate keyboard</dd>
+					<dt>Return</dt><dd>the actual output length of keyboard event</dd>
+				<dl>
+				<pre><code class='java'>static int inputString (Device device, String str);</code></pre>
+			</li>
+
+		</ul>
+	</li>
+</ul>
+</body>
+</html>
